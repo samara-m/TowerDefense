@@ -9,9 +9,9 @@ public class CameraController : MonoBehaviour
 
     private GameObject player;
 
-    // public float scrollSpeed = 20.0f;
-    // public float minScroll;
-    // public float maxScroll;
+    public float scrollSpeed = 20.0f;
+    public float minScroll;
+    public float maxScroll;
 
     private void Start()
     {
@@ -50,9 +50,9 @@ public class CameraController : MonoBehaviour
         }
 
         // Zoom
-        // float scroll = Input.GetAxis("Mouse ScrollWheel");
-        // pos.y += scrollSpeed * scroll * 100f * Time.deltaTime; 
-        // pos.y = Mathf.Clamp(pos.y, minScroll, maxScroll);
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        pos.y -= scrollSpeed * scroll * 100f * Time.deltaTime; 
+        pos.y = Mathf.Clamp(pos.y, minScroll, maxScroll);
 
         // Limit
         pos.z = Mathf.Clamp(pos.z, -panLimit, panLimit);

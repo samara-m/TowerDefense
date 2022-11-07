@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatCanBeClickedOn;
 
     private NavMeshAgent myAgent;
+    public Animator playerAnimator;
+    public bool isRunning;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +30,16 @@ public class PlayerMovement : MonoBehaviour
                 myAgent.SetDestination(hitInfo.point);
             }
         }
+
+        // Moving animation
+        if (myAgent.remainingDistance <= myAgent.stoppingDistance)
+        {
+            isRunning = false;
+        }
+        else
+        {
+            isRunning = true;
+        }
+        playerAnimator.SetBool("isRunning", isRunning);
     }
 }
