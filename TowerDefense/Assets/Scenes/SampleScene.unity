@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.1838713, g: 0.22901875, b: 0.30311438, a: 1}
+  m_IndirectSpecularColor: {r: 0.18387063, g: 0.22901762, b: 0.30311236, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3345,10 +3345,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panBorderThickness: 10
   panSpeed: 50
-  panLimit: 1000
+  panLimit: 650
   scrollSpeed: 20
   minScroll: 5
-  maxScroll: 1000
+  maxScroll: 75
 --- !u!1 &980412368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3512,7 +3512,7 @@ MonoBehaviour:
   - {fileID: 709798861}
   - {fileID: 1869841566}
   enemyCount: 0
-  waveNumber: 1
+  level: 1
 --- !u!4 &995785204
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
     public float panBorderThickness = 10.0f; 
     public float panSpeed = 20.0f;
     public float panLimit = 200f;
+    public float offset;
 
     private GameObject player;
 
@@ -16,7 +17,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         //Fix this to Player later
-        player = GameObject.Find("Tower");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -43,12 +44,6 @@ public class CameraController : MonoBehaviour
             pos.x -= panSpeed * Time.deltaTime;
         }
 
-        // go to player position
-        if (Input.GetKey("f")){
-            pos.x = player.transform.position.x;
-            pos.z = player.transform.position.y - pos.y;
-        }
-
         // Zoom
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         pos.y -= scrollSpeed * scroll * 100f * Time.deltaTime; 
@@ -57,6 +52,13 @@ public class CameraController : MonoBehaviour
         // Limit
         pos.z = Mathf.Clamp(pos.z, -panLimit, panLimit);
         pos.x = Mathf.Clamp(pos.x, -panLimit, panLimit);
+
+        // go to player position
+        if (Input.GetKey("f")){
+            pos.x = player.transform.position.x;
+            pos.z = player.transform.position.z + offset;
+            Debug.Log(player.transform.position);
+        }
 
         transform.position = pos;
     }

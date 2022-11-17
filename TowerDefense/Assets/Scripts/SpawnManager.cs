@@ -7,18 +7,20 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform[] spawnLocations;
     public int enemyCount;
-    public int waveNumber = 1;
+    public int level = 1;
+    private float waitTime = 20.0f;
 
     private void Start()
     {
-        spawnEnemyWave(waveNumber);
+        spawnEnemyWave(level);
     }
     private void Update()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount == 0){
-            waveNumber++;
-            spawnEnemyWave(waveNumber);
+            StartCoroutine("ResetTime");
+            level++;
+            spawnEnemyWave(level);
         }
     }
 
@@ -28,5 +30,9 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemyPrefab, spawnLocations[Random.Range(0,spawnLocations.Length)].transform.position, enemyPrefab.transform.rotation) ;
         }
         
+    }
+
+    IEnumerable ResetTime() {
+        yield return new WaitForSeconds(waitTime);
     }
 }
