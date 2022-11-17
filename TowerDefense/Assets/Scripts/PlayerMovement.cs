@@ -11,10 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public Animator playerAnimator;
     public bool isRunning;
     public bool targetedEnemy = false;
-    public float playerHealth = 500.0f;
-    public float playerDamage = 20.0f;
     public bool leftClick = true;
     RaycastHit hitInfo;
+    public PlayerStats player;
   
     // Start is called before the first frame update
     void Start()
@@ -22,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
         myAgent = GetComponent<NavMeshAgent>();
         playerAnimator = GetComponent<Animator>();
         myAgent.speed = 20.0f;
+        player = GetComponent<PlayerStats>();
+        player.health = player.maxHealth;
     }
 
     // Update is called once per frame
@@ -95,12 +96,24 @@ public class PlayerMovement : MonoBehaviour
     void Damage (Transform enemy)
 	{
 		Enemy e = enemy.GetComponent<Enemy>();
+        transform.LookAt(e.transform);
 
 		if (e != null)
 		{
-			e.TakeDamage(playerDamage);
+            e.enemyAttacked = true;
+			e.TakeDamage(player.damage);
 		}
 	}
+
+    public void TakeDamage (float amount){
+        player.health -= amount;
+        Debug.Log("Player health -" + amount + ", remain " + player.health);
+
+		if (player.health <= 0)
+		{
+			playerAnimator.SetTrigger("isDead");
+		}
+    }
 
     void Attack(){
         myAgent.isStopped = true;

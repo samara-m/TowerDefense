@@ -8,7 +8,6 @@ public class SpawnManager : MonoBehaviour
     public Transform[] spawnLocations;
     public int enemyCount;
     public int level = 1;
-    private float waitTime = 20.0f;
 
     private void Start()
     {
@@ -18,7 +17,6 @@ public class SpawnManager : MonoBehaviour
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
         if (enemyCount == 0){
-            StartCoroutine("ResetTime");
             level++;
             spawnEnemyWave(level);
         }
@@ -32,7 +30,4 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    IEnumerable ResetTime() {
-        yield return new WaitForSeconds(waitTime);
-    }
 }
